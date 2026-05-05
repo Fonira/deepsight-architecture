@@ -193,6 +193,10 @@ Yes — PDF, DOCX, Markdown, XLSX. On Pro tier and above. Notion + Linear integr
 
 See [deepsightsynthesis.com/trust](https://deepsightsynthesis.com/trust) (Trust Center) for subprocessor list, DPA, security whitepaper, and GDPR Art 22 disclosure.
 
+### How does Mistral compare to OpenAI / Anthropic / Google on your specific tasks?
+
+We publish a reproducible benchmark protocol comparing Mistral against OpenAI, Anthropic and Google on our actual video-analysis task families. See [BENCHMARK.md](./BENCHMARK.md). The protocol is published first; numerical results from the first run land end of May 2026.
+
 ## Get involved
 
 - Bug reports / feature requests: [GitHub Issues](https://github.com/Fonira/deepsight-architecture/issues)
