@@ -5,6 +5,8 @@ This document describes how DeepSight benchmarks Mistral against alternative LLM
 It is meant to be **honest, reproducible, and fair** — not marketing.
 
 > **Status (2026-05-06)**: This is the **protocol** specification. The first benchmark run is scheduled for end of May 2026. Numerical results below are explicitly marked _not yet measured_. We are publishing the protocol first so the community can audit and challenge the methodology before any numbers are produced — that way you can trust the numbers when they land.
+>
+> **Reproducibility harness is already live**: see [`benchmark/run.py`](./benchmark/run.py) (CLI script comparing Mistral medium / gpt-4o-mini / Claude Haiku 4.5 / Gemini 2.0 Flash with `--dry-run` cost estimator, exponential-backoff retry, resumable runs) and [`dataset/README.md`](./dataset/README.md) for the corpus spec. 23 unit tests green. Anyone with the four API keys can reproduce our numbers — see "How to reproduce" at the bottom of this file.
 
 We intend to publish benchmark results quarterly.
 
@@ -192,8 +194,43 @@ For privacy, subprocessor list, DPA, and GDPR Art 22 disclosure, see [deepsights
 
 ---
 
-*Last updated: 2026-05-06. Protocol-only; first run results scheduled end of May 2026.*
+## How to reproduce
 
-*Code and data for benchmark runs will live under `benchmarks/<run-date>/` in this repo. Hugging Face dataset link will be added once the annotated corpus is published.*
+The full benchmark harness is shipped in this repo. To reproduce our numbers (or beat them with your own model):
+
+```bash
+# 1. Clone + install
+git clone https://github.com/Fonira/deepsight-architecture.git
+cd deepsight-architecture
+pip install -r benchmark/requirements.txt
+
+# 2. Set the four API keys (env vars only — no secrets in code)
+export MISTRAL_API_KEY=...
+export OPENAI_API_KEY=...
+export ANTHROPIC_API_KEY=...
+export GOOGLE_API_KEY=...
+
+# 3. Dry-run to get the cost estimate before spending anything
+python -m benchmark.run --dry-run --models all
+
+# 4. Real run (resumable — re-run after a failure picks up where it left off)
+python -m benchmark.run --models all --output results/run-$(date -I).csv
+
+# 5. Annotate the outputs against the rubric in dataset/README.md
+#    (5 dimensions × 0–5 scoring, ~10 min/output, ~13h total for 80 outputs)
+
+# 6. Compute aggregate stats and paste the Markdown table back into this file
+python -m benchmark.run --aggregate results/run-$(date -I).csv
+```
+
+Estimated total cost for run #1: **~$1.46** USD (Mistral medium ~$0.36, gpt-4o-mini ~$0.14, Haiku 4.5 ~$0.90, Gemini 2.0 Flash ~$0.06). Well under the $50 buffer cited above — most of the human cost is annotation time, not LLM API.
+
+Tests: `cd benchmark && python -m pytest tests/ -v` (23 unit tests, ~0.17s).
+
+---
+
+*Last updated: 2026-05-06. Protocol + reproducibility harness live; first run results scheduled end of May 2026.*
+
+*Code: [`benchmark/`](./benchmark) — Dataset spec: [`dataset/README.md`](./dataset/README.md) — Hugging Face corpus link will be added once annotation is complete.*
 
 *This document is licensed under [CC BY 4.0](./LICENSE), same as the rest of the repository.*
