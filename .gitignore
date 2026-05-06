@@ -8,3 +8,17 @@ Thumbs.db
 .env
 .env.local
 node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Benchmark run outputs (keep README, ignore CSVs)
+results/*.csv
+results/*.json
+!results/README.md
