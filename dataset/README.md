@@ -2,7 +2,7 @@
 
 This directory specifies the **20-video corpus** and **annotation rubric** used by the DeepSight public benchmark. It is the source of truth for run #1 (May 2026) and any subsequent run that wants to be comparable.
 
-> **Status**: dataset frozen 2026-05-06. Annotations are produced during run #1 and committed to `dataset/annotations/run-1/` before publication.
+> **Status**: dataset frozen 2026-05-07 — see [`videos.csv`](videos.csv) for the verified-live 20-video list. Annotations are produced during run #1 and committed to `dataset/annotations/run-1/` before publication.
 
 ## Goals
 
@@ -24,7 +24,7 @@ The annotated dataset will be published at:
 
 **20 videos = 4 task families × 5 videos.** Each video is selected for being publicly available on YouTube, with no copyright strikes, and covering the long-form analysis use-case DeepSight optimises for (no Shorts, no <15-min clips).
 
-Languages: 12 EN / 8 FR (proportional to current DeepSight user base, weighted toward EN to match HuggingFace community).
+Languages: 13 EN / 7 FR (target was 12/8; relaxed by one because no French long-form `tutorial_howto` ≥1h with a credible audience could be verified at freeze time — see commit message of dataset freeze for details). Proportions remain weighted toward EN to match the HuggingFace community.
 
 Total transcript volume ≈ 600,000 input tokens across the corpus, ≈ 30k tokens average per video.
 
@@ -76,7 +76,7 @@ Procedural content. Tests whether the model preserves the *order of steps* and i
 | ht-04 | Cocadmin — Devenir DevOps en 2024 | Cocadmin | https://www.youtube.com/watch?v=qVk9tUz-K9w | ~1h30 | FR | French career tutorial, mixed advice + steps |
 | ht-05 | Micode — Maîtriser Linux en 1h | Micode | https://www.youtube.com/watch?v=hsNnpBXr1do | ~1h | FR | Procedural French tutorial, mainstream audience |
 
-> **Note on URLs**: the URLs above are placeholders illustrating the intended composition. Before run #1, each entry MUST be replaced with a verified-live, copyright-clear video URL. The selection committee (Maxime + 1 external reviewer) will lock the final list and update `videos.csv` accordingly. If a video becomes unavailable after publication, we keep the transcript snapshot and note the unavailability — we do **not** silently swap.
+> **Note on URLs**: the tables above describe the *intended composition*. The frozen, verified-live URLs and durations live in [`videos.csv`](videos.csv) (committed 2026-05-07) and supersede any URL above that disagrees. If a video becomes unavailable after publication, we keep the transcript snapshot and note the unavailability — we do **not** silently swap.
 
 ## CSV format
 
@@ -230,4 +230,4 @@ If any of the above is missing for a run, that run is **not** reproducible and w
 
 ---
 
-*Last updated: 2026-05-06. Frozen for run #1. Subsequent runs will append to `annotations/run-N/` without modifying this file unless the rubric itself is revised, in which case all prior numbers are re-rated for comparability.*
+*Last updated: 2026-05-07 — `videos.csv` frozen for run #1 (20 verified-live URLs, 13 EN / 7 FR, total ~36h of video). Subsequent runs will append to `annotations/run-N/` without modifying this file unless the rubric itself is revised, in which case all prior numbers are re-rated for comparability.*
