@@ -207,4 +207,4 @@ We publish a reproducible benchmark protocol comparing Mistral against OpenAI, A
 
 *Last updated: 2026-05-06. This document is versioned in [github.com/Fonira/deepsight-architecture](https://github.com/Fonira/deepsight-architecture). PRs welcome on the architecture documentation itself even if the code isn't open-source.*
 
-*Licensed under [CC BY 4.0](./LICENSE).*
+*Copyright © 2026 Maxime Leparc — Entrepreneur Individuel (SIRET 994 558 898 00015), trading as DeepSight. Licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE).*
